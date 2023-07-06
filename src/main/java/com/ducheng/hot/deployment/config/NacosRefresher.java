@@ -16,7 +16,6 @@ import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
 import org.springframework.context.ApplicationListener;
 import java.lang.instrument.ClassDefinition;
 import java.lang.instrument.Instrumentation;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -46,7 +45,7 @@ public class NacosRefresher   implements ApplicationListener<EnvironmentChangeEv
             Class<?> aClass = Class.forName(className);
             ClassDefinition classDefinition = new ClassDefinition(aClass, bytes);
             inst.redefineClasses(classDefinition);
-            log.info("加载的class文件是：{}",new String(bytes));
+            log.info("加载的class文件名称是：{}",className);
         } catch (NacosException e) {
             e.printStackTrace();
         } catch (Exception e) {
